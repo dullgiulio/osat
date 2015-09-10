@@ -47,7 +47,7 @@ func merge(lines []string) string {
 // transform reads, merges and outputs to the out channel an group of consecutive ALTER statements
 func transform(out chan<- string, in <-chan string) {
 	lines := make([]string, 1)
-	lines[0] = line
+	lines[0] = <-in
 	for line := range in {
 		// End of the alter table statements: merge the found ones
 		// and remember to print out this normal line
