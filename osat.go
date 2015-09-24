@@ -68,7 +68,7 @@ func transform(line string, out chan<- string, in <-chan string) {
 			}
 			line = buf.String()
 		}
-		lines = append(lines, line)
+		lines = append(lines, line+"\n")
 	}
 	out <- merge(lines)
 }
