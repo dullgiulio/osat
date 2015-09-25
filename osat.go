@@ -58,17 +58,17 @@ func transform(line string, out chan<- string, in <-chan string) {
 		// Read up until the end of the statement in one line
 		if !strings.HasSuffix(line, ";") {
 			var buf bytes.Buffer
-			buf.WriteString(line)
+			buf.WriteString(line + "\n")
 			// Read until the end of this query
 			for l := range in {
-				buf.WriteString(l)
+				buf.WriteString(l + "\n")
 				if strings.HasSuffix(l, ";") {
 					break
 				}
 			}
 			line = buf.String()
 		}
-		lines = append(lines, line+"\n")
+		lines = append(lines, line)
 	}
 	out <- merge(lines)
 }
